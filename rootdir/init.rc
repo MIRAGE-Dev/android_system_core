@@ -259,6 +259,7 @@ on post-fs-data
 
 # Include extra init file
     import /init.mirage.rc
+    import /init.cm.rc
 
 on boot
 # basic network init
@@ -280,8 +281,8 @@ on boot
     chmod 0664 /sys/module/lowmemorykiller/parameters/minfree
 
     # Tweak background writeout
-    write /proc/sys/vm/dirty_expire_centisecs 200
-    write /proc/sys/vm/dirty_background_ratio  5
+    write /proc/sys/vm/dirty_expire_centisecs 250
+    write /proc/sys/vm/dirty_background_ratio  10
 
     # Permissions for System Server and daemons.
     chown radio system /sys/android_power/state
