@@ -260,9 +260,11 @@ on post-fs-data
 
 # Include extra init file
     import /init.mirage.rc
-    import /init.cm.rc
 
 on boot
+    # Run sysinit
+    start sysinit
+
     # interactive governor
     chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
@@ -558,4 +560,8 @@ service mdnsd /system/bin/mdnsd
     group inet net_raw
     socket mdnsd stream 0660 mdnsr inet
     disabled
+    oneshot
+
+service sysinit /system/bin/sysinit
+    user root
     oneshot
