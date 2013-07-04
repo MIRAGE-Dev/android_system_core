@@ -279,6 +279,7 @@ on boot
     chown system system /sys/devices/system/cpu/cpufreq/interactive/boost
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boost
     chown system system /sys/devices/system/cpu/cpufreq/interactive/boostpulse
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boostpulse
     chown system system /sys/devices/system/cpu/cpufreq/interactive/input_boost
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/input_boost
     chown system system /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration
@@ -332,7 +333,7 @@ on boot
 
     # Tweak background writeout
     write /proc/sys/vm/dirty_expire_centisecs 250
-    write /proc/sys/vm/dirty_background_ratio  10
+    write /proc/sys/vm/dirty_background_ratio  15
 
     # Permissions for System Server and daemons.
     chown radio system /sys/android_power/state
