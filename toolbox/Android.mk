@@ -2,77 +2,71 @@ LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
 TOOLS := \
-	ls \
-	mount \
-	cat \
-	ps \
-	kill \
-	ln \
-	insmod \
-	rmmod \
-	lsmod \
-	ifconfig \
-	setconsole \
-	rm \
-	mkdir \
-	rmdir \
-	getevent \
-	sendevent \
-	date \
-	wipe \
-	sync \
-	umount \
-	start \
-	stop \
-	notify \
-	cmp \
-	dmesg \
-	route \
-	hd \
-	dd \
-	df \
-	getprop \
-	setprop \
-	watchprops \
-	log \
-	sleep \
-	renice \
-	printenv \
-	smd \
-	chmod \
-	chown \
-	newfs_msdos \
-	netstat \
-	ioctl \
-	mv \
-	schedtop \
-	top \
-	iftop \
-	id \
-	uptime \
-	vmstat \
-	nandread \
-	ionice \
-	touch \
-	lsof \
-	du \
-	md5 \
-	restart
-
-ifeq ($(HAVE_SELINUX),true)
-
-TOOLS += \
-	getenforce \
-	setenforce \
-	chcon \
-	restorecon \
-	runcon \
-	getsebool \
-	setsebool \
-	load_policy
-
-endif
-
+        ls \
+        mount \
+        cat \
+        ps \
+        kill \
+        ln \
+        insmod \
+        rmmod \
+        lsmod \
+        ifconfig \
+        setconsole \
+        rm \
+        mkdir \
+        rmdir \
+        getevent \
+        sendevent \
+        date \
+        wipe \
+        sync \
+        umount \
+        start \
+        stop \
+        notify \
+        cmp \
+        dmesg \
+        route \
+        hd \
+        dd \
+        df \
+        getprop \
+        setprop \
+        watchprops \
+        log \
+        sleep \
+        renice \
+        printenv \
+        smd \
+        chmod \
+        chown \
+        newfs_msdos \
+        netstat \
+        ioctl \
+        mv \
+        schedtop \
+        top \
+        iftop \
+        id \
+        uptime \
+        vmstat \
+        nandread \
+        ionice \
+        touch \
+        lsof \
+        du \
+        md5 \
+        clear \
+        getenforce \
+        setenforce \
+        chcon \
+        restorecon \
+        runcon \
+        getsebool \
+        setsebool \
+        load_policy \
+        restart
 
 ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
 TOOLS += r
@@ -80,35 +74,24 @@ endif
 
 ALL_TOOLS = $(TOOLS)
 ALL_TOOLS += \
-	cp \
-	grep
+        cp \
+        grep
 
 LOCAL_SRC_FILES := \
-	dynarray.c \
-	toolbox.c \
-	$(patsubst %,%.c,$(TOOLS)) \
-	cp/cp.c cp/utils.c \
-	grep/grep.c grep/fastgrep.c grep/file.c grep/queue.c grep/util.c
-
-TOOLS += reboot
-
-ifeq ($(BOARD_USES_BOOTMENU),true)
-	LOCAL_SRC_FILES += ../../../external/bootmenu/libreboot/reboot.c
-else
-	LOCAL_SRC_FILES += reboot.c
-endif
-
-LOCAL_SHARED_LIBRARIES := libcutils libc libusbhost
+        dynarray.c \
+        toolbox.c \
+        $(patsubst %,%.c,$(TOOLS)) \
+        cp/cp.c cp/utils.c \
+        grep/grep.c grep/fastgrep.c grep/file.c grep/queue.c grep/util.c
 
 LOCAL_C_INCLUDES := bionic/libc/bionic
 
-ifeq ($(HAVE_SELINUX),true)
-
-LOCAL_CFLAGS += -DHAVE_SELINUX
-LOCAL_SHARED_LIBRARIES += libselinux
-LOCAL_C_INCLUDES += external/libselinux/include
-
-endif
+LOCAL_SHARED_LIBRARIES := \
+        libcutils \
+        liblog \
+        libc \
+        libusbhost \
+        libselinux
 
 LOCAL_MODULE := toolbox
 
